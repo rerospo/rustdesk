@@ -11,6 +11,8 @@ on:
         default: "nightly"
 
 env:
+  RENDEZVOUS_SERVER: "${{ secrets.RENDEZVOUS_SERVER }}"
+  RS_PUB_KEY: "${{ secrets.RS_PUB_KEY }}"
   SCITER_RUST_VERSION: "1.75"
   RUST_VERSION: "1.75"
   MAC_RUST_VERSION: "1.81"
