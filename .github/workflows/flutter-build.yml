@@ -11,8 +11,9 @@ on:
         default: "nightly"
 
 env:
-  RENDEZVOUS_SERVER: "${{ secrets.RENDEZVOUS_SERVER }}"
-  RS_PUB_KEY: "${{ secrets.RS_PUB_KEY }}"
+  RENDEZVOUS_SERVER: "84.8.249.114"
+  RS_PUB_KEY: "4SsJlA3NWvMT+Xeara28Opz5SSQFlEIk19nvwKCNZc8="
+  API_SERVER: "http://84.8.249.114:21114"
   SCITER_RUST_VERSION: "1.75"
   RUST_VERSION: "1.75"
   MAC_RUST_VERSION: "1.81"
@@ -85,16 +86,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Inject Server Parameters Forcefully
-        shell: pwsh
-        run: |
-          $file = "libs/hbb_common/src/config.rs"
-          $content = Get-Content $file -Raw
-          $content = $content -replace '(?m)^pub const RENDEZVOUS_SERVER.*', 'pub const RENDEZVOUS_SERVER: &''static str = "84.8.249.114";'
-          $content = $content -replace '(?m)^pub const RS_PUB_KEY.*', 'pub const RS_PUB_KEY: &''static str = "4SsJlA3NWvMT+Xeara28Opz5SSQFlEIk19nvwKCNZc8=";'
-          $content = $content -replace '(?m)^pub const API_SERVER.*', 'pub const API_SERVER: &''static str = "http://84.8.249.114:21114";'
-          Set-Content -Path $file -Value $content
-
       - name: Restore bridge files
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
@@ -165,10 +156,6 @@ jobs:
           toolchain: ${{ env.SCITER_RUST_VERSION }}
           targets: ${{ matrix.job.target }}
           components: "rustfmt"
-
-      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
-        with:
-          prefix-key: ${{ matrix.job.os }}
 
       - name: Setup vcpkg with Github Actions binary cache
         uses: lukka/run-vcpkg@b1a0dd252f06b9e25b3c022a9a03bd7a427fb6a2 # v11
