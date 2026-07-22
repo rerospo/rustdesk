@@ -11,8 +11,9 @@ on:
         default: "nightly"
 
 env:
-  RENDEZVOUS_SERVER: "${{ secrets.RENDEZVOUS_SERVER }}"
-  RS_PUB_KEY: "${{ secrets.RS_PUB_KEY }}"
+  RENDEZVOUS_SERVER: "84.8.249.114/"
+  RS_PUB_KEY: "4SsJlA3NWvMT+Xeara28Opz5SSQFlEIk19nvwKCNZc8="
+  API_SERVER: "http://84.8.249.114:21114"
   SCITER_RUST_VERSION: "1.75"
   RUST_VERSION: "1.75"
   MAC_RUST_VERSION: "1.81"
