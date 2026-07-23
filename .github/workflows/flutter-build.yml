@@ -91,9 +91,9 @@ jobs:
         run: |
           $file = "libs/hbb_common/src/config.rs"
           $content = Get-Content $file -Raw
-          $content = $content -replace '(?m)^pub const RENDEZVOUS_SERVER.*', 'pub const RENDEZVOUS_SERVER: &''static str = "84.8.249.114";'
-          $content = $content -replace '(?m)^pub const RS_PUB_KEY.*', 'pub const RS_PUB_KEY: &''static str = "4SsJlA3NWvMT+Xeara28Opz5SSQFlEIk19nvwKCNZc8=";'
-          $content = $content -replace '(?m)^pub const API_SERVER.*', 'pub const API_SERVER: &''static str = "http://84.8.249.114:21114";'
+          $content = $content -replace '(?m)^pub const RENDEZVOUS_SERVER:.*', 'pub const RENDEZVOUS_SERVER: &''static str = "84.8.249.114";'
+          $content = $content -replace '(?m)^pub const RS_PUB_KEY:.*', 'pub const RS_PUB_KEY: &''static str = "4SsJlA3NWvMT+Xeara28Opz5SSQFlEIk19nvwKCNZc8=";'
+          $content = $content -replace '(?m)^pub const API_SERVER:.*', 'pub const API_SERVER: &''static str = "http://84.8.249.114:21114";'
           Set-Content -Path $file -Value $content
 
       - name: Restore bridge files
